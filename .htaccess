@@ -1,0 +1,39 @@
+# Name of file: /.htaccess
+# Programmed by: Jaime C Smith
+# Date: 2023-11-14
+# Purpose of this code: Configure server settings and URL rewriting
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Set base directory
+RewriteBase /
+
+# Prevent directory listing
+Options -Indexes
+
+# Handle 404 errors
+ErrorDocument 404 /404.php
+
+# Redirect to HTTPS (uncomment in production)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect config files
+<FilesMatch "^(config\.php|database\.php)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# PHP settings
+php_flag display_errors off
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+php_value max_execution_time 300
+php_value max_input_time 300
