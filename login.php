@@ -3,7 +3,7 @@
 Name of file: /login.php
 Programmed by: Jaime C Smith
 Date: 2023-11-14
-Purpose of this code: User login page
+Purpose of this code: User login page with verification check
 */
 
 // Start session
@@ -19,6 +19,7 @@ if(isset($_SESSION['user_id'])) {
 require_once 'config/database.php';
 require_once 'includes/functions.php';
 require_once 'models/User.php';
+require_once 'includes/admin_notifications.php';
 
 // Set page title
 $pageTitle = 'Login - Art Auction';
@@ -44,40 +45,59 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // If no errors, proceed with login
     if(empty($errors)) {
-        // Database connection
-        $database = new Database();
-        $db = $database->connect();
-        
-        // Create user object
-        $user = new User($db);
-        
-        // Set user properties
-        $user->username = $username;
-        $user->password = $password;
-        
-        // Login user
-        if($user->login()) {
-            $success = true;
+        try {
+            // Database connection
+            $database = new Database();
+            $db = $database->connect();
             
-            // Set session variables
-            $_SESSION['user_id'] = $user->id;
-            $_SESSION['username'] = $user->username;
-            $_SESSION['user_type'] = $user->user_type;
+            // Create user object
+            $user = new User($db);
             
-            // Set remember me cookie if checked
-            if($remember) {
-                $token = generate_token();
-                setcookie('remember_token', $token, time() + (86400 * 30), '/'); // 30 days
+            // Set user properties
+            $user->username = $username;
+            $user->password = $password;
+            
+            // Login user
+            if($user->login()) {
+                // Check if user is verified
+                if($user->is_verified()) {
+                    $success = true;
+                    
+                    // Set session variables
+                    $_SESSION['user_id'] = $user->id;
+                    $_SESSION['username'] = $user->username;
+                    $_SESSION['user_type'] = $user->user_type;
+                    
+                    // Send admin notification
+                    notify_admin_login(
+                        $user->username,
+                        $user->email,
+                        $user->first_name,
+                        $user->last_name,
+                        $user->user_type
+                    );
+                    
+                    // Set remember me cookie if checked
+                    if($remember) {
+                        $token = generate_token();
+                        setcookie('remember_token', $token, time() + (86400 * 30), '/'); // 30 days
+                    }
+                    
+                    // Store the success message in session to display after redirect
+                    $_SESSION['login_success'] = true;
+                    
+                    // Redirect to dashboard using JavaScript to avoid header issues
+                    echo "<script>window.location.href = 'dashboard.php';</script>";
+                    exit();
+                } else {
+                    $errors[] = 'Your email address has not been verified. Please check your email for the verification link or <a href="resend_verification.php">request a new one</a>.';
+                }
+            } else {
+                $errors[] = 'Invalid username/email or password';
             }
-            
-            // Store the success message in session to display after redirect
-            $_SESSION['login_success'] = true;
-            
-            // Redirect to dashboard using JavaScript to avoid header issues
-            echo "<script>window.location.href = 'dashboard.php';</script>";
-            exit();
-        } else {
-            $errors[] = 'Invalid username/email or password';
+        } catch (Exception $e) {
+            $errors[] = 'An error occurred: ' . $e->getMessage();
+            error_log("Login error: " . $e->getMessage());
         }
     }
 }
@@ -94,6 +114,14 @@ include_once 'includes/header.php';
                     <h3 class="mb-0">Login to Your Account</h3>
                 </div>
                 <div class="card-body">
+                    <?php if(isset($_SESSION['message'])): ?>
+                        <div class="alert alert-<?php echo $_SESSION['message_type'] ?? 'info'; ?> alert-dismissible fade show">
+                            <?php echo $_SESSION['message']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
+                    <?php endif; ?>
+                    
                     <?php if($success): ?>
                         <div class="alert alert-success">
                             Login successful! Redirecting...
@@ -147,4 +175,5 @@ include_once 'includes/header.php';
 // Include footer
 include_once 'includes/footer.php';
 ?>
+
 

@@ -1,0 +1,99 @@
+[18-Jun-2025 00:15:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/smithfre/artmichels.com/models/User.php:322) in /home/smithfre/artmichels.com/login.php on line 101
+[18-Jun-2025 00:16:04 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/smithfre/artmichels.com/models/User.php:322) in /home/smithfre/artmichels.com/login.php on line 101
+[18-Jun-2025 00:16:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/smithfre/artmichels.com/models/User.php:322) in /home/smithfre/artmichels.com/login.php on line 101
+[18-Jun-2025 00:16:32 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/smithfre/artmichels.com/models/User.php:322) in /home/smithfre/artmichels.com/login.php on line 101
+[18-Jun-2025 00:24:30 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/smithfre/artmichels.com/models/User.php:322) in /home/smithfre/artmichels.com/login.php on line 101
+[18-Jun-2025 01:25:04 UTC] Error in login method: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'verified' in 'field list'
+[18-Jun-2025 01:25:24 UTC] Error in login method: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'verified' in 'field list'
+[18-Jun-2025 01:25:28 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:25:28 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:25:28 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/phpmailer/phpmailer/src/Exception.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/includes/Mailer.php:18
+Stack trace:
+#0 /home/smithfre/artmichels.com/register.php(22): require_once()
+#1 {main}
+  thrown in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:25:30 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:25:30 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:25:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/phpmailer/phpmailer/src/Exception.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/includes/Mailer.php:18
+Stack trace:
+#0 /home/smithfre/artmichels.com/register.php(22): require_once()
+#1 {main}
+  thrown in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:25:59 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:25:59 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:25:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/phpmailer/phpmailer/src/Exception.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/includes/Mailer.php:18
+Stack trace:
+#0 /home/smithfre/artmichels.com/register.php(22): require_once()
+#1 {main}
+  thrown in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:26:31 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:26:31 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:26:31 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/phpmailer/phpmailer/src/Exception.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/includes/Mailer.php:18
+Stack trace:
+#0 /home/smithfre/artmichels.com/register.php(21): require_once()
+#1 {main}
+  thrown in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:31:38 UTC] Registration error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'verified' in 'field list'
+[18-Jun-2025 01:37:07 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/smithfre/artmichels.com/models/User.php:453) in /home/smithfre/artmichels.com/register.php on line 215
+[18-Jun-2025 01:41:19 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:41:19 UTC] PHP Warning:  require(vendor/phpmailer/phpmailer/src/Exception.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 01:41:19 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'vendor/phpmailer/phpmailer/src/Exception.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/includes/Mailer.php:18
+Stack trace:
+#0 /home/smithfre/artmichels.com/resend_verification.php(15): require_once()
+#1 {main}
+  thrown in /home/smithfre/artmichels.com/includes/Mailer.php on line 18
+[18-Jun-2025 02:02:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::register_basic() in /home/smithfre/artmichels.com/register.php:103
+Stack trace:
+#0 {main}
+  thrown in /home/smithfre/artmichels.com/register.php on line 103
+[18-Jun-2025 02:03:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::register_basic() in /home/smithfre/artmichels.com/register.php:103
+Stack trace:
+#0 {main}
+  thrown in /home/smithfre/artmichels.com/register.php on line 103
+[18-Jun-2025 02:03:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::register_basic() in /home/smithfre/artmichels.com/register.php:103
+Stack trace:
+#0 {main}
+  thrown in /home/smithfre/artmichels.com/register.php on line 103
+[18-Jun-2025 02:05:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method User::register_basic() in /home/smithfre/artmichels.com/register.php:103
+Stack trace:
+#0 {main}
+  thrown in /home/smithfre/artmichels.com/register.php on line 103
+[18-Jun-2025 02:31:32 UTC] Email debug info: Array
+(
+    [0] => User registered successfully with ID: 11
+    [1] => SimpleMailer is not available
+    [2] => Email sent successfully using PHP mail() to: jsmith@smithfreelancing.com
+)
+
+[18-Jun-2025 02:33:42 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 280
+[18-Jun-2025 02:33:42 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 280
+[18-Jun-2025 02:34:00 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 280
+[18-Jun-2025 02:34:00 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 280
+[18-Jun-2025 02:50:36 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: New User Registration - Art Auction
+[18-Jun-2025 02:50:36 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[18-Jun-2025 02:50:36 UTC] SimpleMailer: Attempting to send email to Jaime@smithcardozo.com with subject: Welcome to Art Auction Platform
+[18-Jun-2025 02:50:36 UTC] SimpleMailer: Email sent successfully to Jaime@smithcardozo.com
+[18-Jun-2025 02:50:36 UTC] Email debug info: Array
+(
+    [0] => User registered successfully with ID: 12
+    [1] => SimpleMailer is available
+    [2] => SimpleMailer instance created
+    [3] => Email sent successfully to: Jaime@smithcardozo.com
+)
+
+[18-Jun-2025 03:05:44 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: New User Registration - Art Auction
+[18-Jun-2025 03:05:44 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[18-Jun-2025 03:05:44 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: Welcome to Art Auction Platform
+[18-Jun-2025 03:05:44 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[18-Jun-2025 03:05:44 UTC] Email debug info: Array
+(
+    [0] => User registered successfully with ID: 13
+    [1] => SimpleMailer is available
+    [2] => SimpleMailer instance created
+    [3] => Email sent successfully to: jsmith@smithfreelancing.com
+)
+
+[18-Jun-2025 03:24:17 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: New User Registration - Art Auction
+[18-Jun-2025 03:24:17 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[18-Jun-2025 03:25:20 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: User Login - Art Auction
+[18-Jun-2025 03:25:20 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com

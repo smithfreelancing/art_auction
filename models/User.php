@@ -23,6 +23,7 @@ class User {
     public $user_type;
     public $created_at;
     public $updated_at;
+    public $verified;
     
     // Constructor with DB connection
     public function __construct($db) {
@@ -42,11 +43,11 @@ class User {
         // Hash password
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         
-        // SQL query
+        // SQL query - explicitly set verified to FALSE
         $query = "INSERT INTO " . $this->table . "
-                  (username, email, password, first_name, last_name, user_type)
+                  (username, email, password, first_name, last_name, user_type, verified)
                   VALUES
-                  (:username, :email, :password, :first_name, :last_name, :user_type)";
+                  (:username, :email, :password, :first_name, :last_name, :user_type, FALSE)";
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -70,6 +71,45 @@ class User {
         return false;
     }
     
+    // Register user without verification (basic version)
+    public function register_basic() {
+        // Clean data
+        $this->username = htmlspecialchars(strip_tags($this->username));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->password = htmlspecialchars(strip_tags($this->password));
+        $this->first_name = htmlspecialchars(strip_tags($this->first_name));
+        $this->last_name = htmlspecialchars(strip_tags($this->last_name));
+        $this->user_type = htmlspecialchars(strip_tags($this->user_type));
+        
+        // Hash password
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        
+        // SQL query without the verified field
+        $query = "INSERT INTO " . $this->table . "
+                  (username, email, password, first_name, last_name, user_type)
+                  VALUES
+                  (:username, :email, :password, :first_name, :last_name, :user_type)";
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind parameters
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':password', $this->password);
+        $stmt->bindParam(':first_name', $this->first_name);
+        $stmt->bindParam(':last_name', $this->last_name);
+        $stmt->bindParam(':user_type', $this->user_type);
+        
+        // Execute query
+        if($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();
+            return true;
+        }
+        
+        return false;
+    }
+    
     // Login user
     public function login() {
         try {
@@ -78,7 +118,7 @@ class User {
             $this->password = htmlspecialchars(strip_tags($this->password));
             
             // SQL query - check if username exists
-            $query = "SELECT id, username, email, password, first_name, last_name, profile_image, user_type
+            $query = "SELECT id, username, email, password, first_name, last_name, profile_image, user_type, verified
                       FROM " . $this->table . "
                       WHERE username = :username OR email = :email
                       LIMIT 1";
@@ -104,6 +144,7 @@ class User {
                 $this->last_name = $row['last_name'];
                 $this->profile_image = $row['profile_image'];
                 $this->user_type = $row['user_type'];
+                $this->verified = $row['verified'];
                 
                 // Verify password
                 if(password_verify($this->password, $row['password'])) {
@@ -147,6 +188,7 @@ class User {
             $this->user_type = $row['user_type'];
             $this->created_at = $row['created_at'];
             $this->updated_at = $row['updated_at'];
+            $this->verified = $row['verified'];
             return true;
         }
         
@@ -294,7 +336,7 @@ class User {
         $this->email = htmlspecialchars(strip_tags($this->email));
         
         // SQL query
-        $query = "SELECT id, username, email FROM " . $this->table . " WHERE email = :email LIMIT 1";
+        $query = "SELECT id, username, email, verified FROM " . $this->table . " WHERE email = :email LIMIT 1";
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -312,10 +354,140 @@ class User {
             $this->id = $row['id'];
             $this->username = $row['username'];
             $this->email = $row['email'];
+            $this->verified = $row['verified'];
             return true;
         }
         
         return false;
     }
+    
+    // Check if user is verified
+    public function is_verified() {
+        // SQL query
+        $query = "SELECT verified FROM " . $this->table . " WHERE id = :id LIMIT 1";
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind parameter
+        $stmt->bindParam(':id', $this->id);
+        
+        // Execute query
+        $stmt->execute();
+        
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return isset($row['verified']) && $row['verified'] == 1;
+    }
+    
+    // Set user as verified
+    public function verify() {
+        // SQL query
+        $query = "UPDATE " . $this->table . " SET verified = TRUE WHERE id = :id";
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind parameter
+        $stmt->bindParam(':id', $this->id);
+        
+        // Execute query
+        return $stmt->execute();
+    }
+    
+    // Create verification token
+    public function create_verification_token() {
+        // Generate token
+        $token = bin2hex(random_bytes(32));
+        
+        // Set expiration time (24 hours from now)
+        $expires_at = date('Y-m-d H:i:s', strtotime('+24 hours'));
+        
+        // SQL query
+        $query = "INSERT INTO email_verifications (user_id, token, expires_at) 
+                  VALUES (:user_id, :token, :expires_at)";
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind parameters
+        $stmt->bindParam(':user_id', $this->id);
+        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':expires_at', $expires_at);
+        
+        // Execute query
+        if($stmt->execute()) {
+            return $token;
+        }
+        
+        return false;
+    }
+    
+    // Verify token
+    public function verify_token($token) {
+        // SQL query
+        $query = "SELECT user_id, expires_at FROM email_verifications 
+                  WHERE token = :token LIMIT 1";
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind parameter
+        $stmt->bindParam(':token', $token);
+        
+        // Execute query
+        $stmt->execute();
+        
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if($row) {
+            // Check if token is expired
+            if(strtotime($row['expires_at']) < time()) {
+                return false;
+            }
+            
+            // Set user ID
+            $this->id = $row['user_id'];
+            
+            // Delete token
+            $this->delete_verification_token($token);
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
+    // Delete verification token
+    public function delete_verification_token($token) {
+        // SQL query
+        $query = "DELETE FROM email_verifications WHERE token = :token";
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind parameter
+        $stmt->bindParam(':token', $token);
+        
+        // Execute query
+        return $stmt->execute();
+    }
+    
+    // Delete all verification tokens for a user
+    public function delete_all_verification_tokens() {
+        // SQL query
+        $query = "DELETE FROM email_verifications WHERE user_id = :user_id";
+        
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind parameter
+        $stmt->bindParam(':user_id', $this->id);
+        
+        // Execute query
+        return $stmt->execute();
+    }
 }
+?>
+
 

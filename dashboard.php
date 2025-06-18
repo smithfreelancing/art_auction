@@ -3,7 +3,7 @@
 Name of file: /dashboard.php
 Programmed by: Jaime C Smith
 Date: 2023-11-14
-Purpose of this code: User dashboard page
+Purpose of this code: User dashboard page with verification status check
 */
 
 // Start session
@@ -61,13 +61,13 @@ include_once 'includes/header.php';
         </div>
     <?php endif; ?>
     
-    <!-- Rest of the dashboard code remains the same -->
-
-    
-    
-    
-    
-    
+    <?php if(!$user->is_verified()): ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Email Not Verified</h4>
+            <p>Your email address has not been verified. Please check your inbox for the verification email or <a href="resend_verification.php">request a new one</a>.</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
     
     <div class="row">
         <div class="col-md-3 mb-4">
@@ -230,3 +230,4 @@ include_once 'includes/header.php';
 // Include footer
 include_once 'includes/footer.php';
 ?>
+
