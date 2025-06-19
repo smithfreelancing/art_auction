@@ -119,3 +119,12 @@ Stack trace:
 [19-Jun-2025 00:26:34 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
 [19-Jun-2025 00:41:31 UTC] PHP Warning:  Undefined property: Artist::$user_type in /home/smithfre/artmichels.com/artist.php on line 52
 [19-Jun-2025 00:41:31 UTC] Artist ID: 14, Username: jsmith, User Type: 
+[19-Jun-2025 01:33:30 UTC] PHP Warning:  Undefined property: Artist::$user_type in /home/smithfre/artmichels.com/artist.php on line 52
+[19-Jun-2025 01:33:30 UTC] Artist ID: 14, Username: jsmith, User Type: 
+[19-Jun-2025 01:33:33 UTC] PHP Warning:  Undefined property: Artist::$user_type in /home/smithfre/artmichels.com/artist.php on line 52
+[19-Jun-2025 01:33:33 UTC] Artist ID: 14, Username: jsmith, User Type: 
+[19-Jun-2025 01:33:52 UTC] PHP Warning:  Undefined property: Artist::$user_type in /home/smithfre/artmichels.com/artist.php on line 52
+[19-Jun-2025 01:33:52 UTC] Artist ID: 14, Username: jsmith, User Type: 
+[19-Jun-2025 01:40:30 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: User Login - Art Auction
+[19-Jun-2025 01:40:31 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[19-Jun-2025 01:40:41 UTC] Error reading active auctions: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'auction_id' in 'where clause'

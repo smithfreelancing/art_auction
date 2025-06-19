@@ -2,14 +2,9 @@
 /*
 Name of file: /artist.php
 Programmed by: Jaime C Smith
-Date: 2023-11-15
+Date: 06/18/2025
 Purpose of this code: Display an artist's profile and portfolio
 */
-
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 // Start session
 session_start();
@@ -26,12 +21,7 @@ if (!isset($_GET['id'])) {
     exit();
 }
 
-// Get and validate artist ID
 $artist_id = intval($_GET['id']);
-if ($artist_id <= 0) {
-    header('Location: artists.php');
-    exit();
-}
 
 // Database connection
 $database = new Database();
@@ -47,9 +37,6 @@ if (!$artist->read_single()) {
     header('Location: artists.php');
     exit();
 }
-
-// Log for debugging
-error_log("Artist ID: $artist_id, Username: {$artist->username}, User Type: {$artist->user_type}");
 
 // Get artist statistics
 $stats = $artist->get_statistics();
@@ -450,6 +437,7 @@ include_once 'includes/header.php';
 // Include footer
 include_once 'includes/footer.php';
 ?>
+
 
 
 
