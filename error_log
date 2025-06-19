@@ -97,3 +97,25 @@ Stack trace:
 [18-Jun-2025 03:24:17 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
 [18-Jun-2025 03:25:20 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: User Login - Art Auction
 [18-Jun-2025 03:25:20 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[18-Jun-2025 22:34:33 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: User Login - Art Auction
+[18-Jun-2025 22:34:33 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[18-Jun-2025 22:36:40 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 280
+[18-Jun-2025 22:36:40 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 280
+[18-Jun-2025 22:41:22 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 260
+[18-Jun-2025 22:41:23 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 260
+[18-Jun-2025 23:15:06 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: User Login - Art Auction
+[18-Jun-2025 23:15:06 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[18-Jun-2025 23:15:06 UTC] PHP Warning:  include_once(includes/artist_stats_widget.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/dashboard.php on line 76
+[18-Jun-2025 23:15:06 UTC] PHP Warning:  include_once(): Failed opening 'includes/artist_stats_widget.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/dashboard.php on line 76
+[18-Jun-2025 23:15:39 UTC] PHP Warning:  include_once(includes/artist_stats_widget.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/dashboard.php on line 76
+[18-Jun-2025 23:15:39 UTC] PHP Warning:  include_once(): Failed opening 'includes/artist_stats_widget.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/dashboard.php on line 76
+[18-Jun-2025 23:15:47 UTC] PHP Warning:  include_once(includes/artist_stats_widget.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/dashboard.php on line 76
+[18-Jun-2025 23:15:47 UTC] PHP Warning:  include_once(): Failed opening 'includes/artist_stats_widget.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/dashboard.php on line 76
+[18-Jun-2025 23:15:51 UTC] PHP Warning:  include_once(includes/artist_stats_widget.php): Failed to open stream: No such file or directory in /home/smithfre/artmichels.com/dashboard.php on line 76
+[18-Jun-2025 23:15:51 UTC] PHP Warning:  include_once(): Failed opening 'includes/artist_stats_widget.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/smithfre/artmichels.com/dashboard.php on line 76
+[18-Jun-2025 23:15:59 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 260
+[18-Jun-2025 23:15:59 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/smithfre/artmichels.com/profile.php on line 260
+[19-Jun-2025 00:26:33 UTC] SimpleMailer: Attempting to send email to jsmith@smithfreelancing.com with subject: User Login - Art Auction
+[19-Jun-2025 00:26:34 UTC] SimpleMailer: Email sent successfully to jsmith@smithfreelancing.com
+[19-Jun-2025 00:41:31 UTC] PHP Warning:  Undefined property: Artist::$user_type in /home/smithfre/artmichels.com/artist.php on line 52
+[19-Jun-2025 00:41:31 UTC] Artist ID: 14, Username: jsmith, User Type: 

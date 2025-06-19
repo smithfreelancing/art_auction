@@ -2,8 +2,8 @@
 /*
 Name of file: /dashboard.php
 Programmed by: Jaime C Smith
-Date: 2023-11-14
-Purpose of this code: User dashboard page with verification status check
+Date: 2023-11-15
+Purpose of this code: User dashboard page with artist welcome message
 */
 
 // Start session
@@ -19,6 +19,7 @@ if(!isset($_SESSION['user_id'])) {
 require_once 'config/database.php';
 require_once 'includes/functions.php';
 require_once 'models/User.php';
+require_once 'models/Artist.php';
 
 // Set page title
 $pageTitle = 'Dashboard - Art Auction';
@@ -68,6 +69,13 @@ include_once 'includes/header.php';
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <?php endif; ?>
+    
+    <?php
+    // Include artist stats widget for artists
+    if($user->user_type === 'artist') {
+        include_once 'includes/artist_stats_widget.php';
+    }
+    ?>
     
     <div class="row">
         <div class="col-md-3 mb-4">
@@ -126,6 +134,47 @@ include_once 'includes/header.php';
                 <div class="card-body">
                     <h5>Welcome, <?php echo htmlspecialchars($user->first_name ?: $user->username); ?>!</h5>
                     <p>Here's an overview of your activity on Art Auction.</p>
+                    
+                    <?php
+                    // Personalized welcome message for artists
+                    if($user->user_type === 'artist'):
+                        // Get artist stats
+                        $artist = new Artist($db);
+                        $artist->id = $user->id;
+                        $artist_stats = $artist->get_statistics();
+                        
+                        // Check if artist has uploaded any artworks
+                        if($artist_stats['total_artworks'] == 0):
+                    ?>
+                        <div class="alert alert-info">
+                            <h5><i class="fas fa-info-circle"></i> Get Started as an Artist</h5>
+                            <p>Welcome to your artist dashboard! To get started, upload your first artwork and set up your artist profile.</p>
+                            <div class="mt-3">
+                                <a href="add-artwork.php" class="btn btn-primary me-2">
+                                    <i class="fas fa-plus"></i> Add Artwork
+                                </a>
+                                <a href="edit_artist_profile.php" class="btn btn-outline-primary">
+                                    <i class="fas fa-user-edit"></i> Complete Your Profile
+                                </a>
+                            </div>
+                        </div>
+                    <?php 
+                        // Check if artist profile is incomplete
+                        elseif(empty($user->bio) || empty($artist->specialties)):
+                    ?>
+                        <div class="alert alert-warning">
+                            <h5><i class="fas fa-exclamation-circle"></i> Complete Your Artist Profile</h5>
+                            <p>Your artist profile is incomplete. Add a bio and specialties to help collectors discover your work.</p>
+                            <div class="mt-3">
+                                <a href="edit_artist_profile.php" class="btn btn-warning">
+                                    <i class="fas fa-user-edit"></i> Complete Your Profile
+                                </a>
+                            </div>
+                        </div>
+                    <?php
+                        endif;
+                    endif;
+                    ?>
                     
                     <div class="row mt-4">
                         <?php if($user->user_type === 'artist'): ?>
@@ -230,4 +279,5 @@ include_once 'includes/header.php';
 // Include footer
 include_once 'includes/footer.php';
 ?>
+
 
